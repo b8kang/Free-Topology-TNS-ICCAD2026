@@ -1,0 +1,5 @@
+========================================
+=== Solution summary (1 solution(s)) ===
+solution[0]: #tr=15, #nets=16, #stages=1 (num_stages=1)
+ - stage 1 : (1_n:VSS,A,n4) (1_n:n5,A,Y) (1_n:n2,B,n4) (1_n:n1,C,n2) (1_n:n4,D,Y) (1_n:n2,E,n5) (1_n:VSS,F,n1) (1_p:VDD,A,n3) (1_p:n7,A,Y) (1_p:VDD,B,n7) (1_p:n3,C,n7) (1_p:n3,D,Y) (1_p:VDD,E,n3) (1_p:n3,F,n6) (1_p:n6,F,n7)
+========================================

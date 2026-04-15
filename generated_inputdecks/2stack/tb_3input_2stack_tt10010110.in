@@ -1,0 +1,515 @@
+******************************************************
+* tb_3input_2stack_tt10010110.in
+* Auto-generated sensitizable arc deck
+* Truth table : 10010110
+* DUT file    : 3input_2stack_tt10010110.sp
+* Base case   : a_r_b0_c0_yf
+******************************************************
+
+***** Includes
+
+
+
+
+***** Global options
+.OPTION POST=2 NOMOD
+.OPTION RUNLVL=5 ACCURATE
+.TEMP 25
+
+******************************************************
+* Parameters
+******************************************************
+.PARAM VDD_MAIN = 0.7
+.PARAM TD   = 20p
+.PARAM TR   = 5p
+.PARAM TF   = 5p
+.PARAM THI  = 1000p
+.PARAM TLO  = 1000p
+.PARAM PER  = 'THI+TLO'
+.PARAM NCYC  = 3
+.PARAM TSTOP = 'TD + NCYC*PER + 200p'
+.PARAM EDGEIDX = 2
+.PARAM EDGE_PRE = 'EDGEIDX-1'
+.PARAM EDGE_NXT = 'EDGEIDX+1'
+.PARAM TLEAKWIN = 4p
+.PARAM ACT = 0.2
+
+******************************************************
+* Supplies
+* - VDDIN    : real input buffer chain
+* - VDDCELL  : DUT cell only
+* - VDDDUMMY : dummy input buffer chain
+* - VDDFO    : output FO load
+******************************************************
+VVDDIN     vddin     0  'VDD_MAIN'
+VVDDCELL   vddcell   0  'VDD_MAIN'
+VVDDDUMMY  vdddummy  0  'VDD_MAIN'
+VVDDFO     vddfo     0  'VDD_MAIN'
+VVSS       vss       0  0
+
+******************************************************
+* Raw input source for selected input pin
+******************************************************
+VIN_RAW in_raw 0 PULSE(0 'VDD_MAIN' 'TD' 'TR' 'TF' 'THI' 'PER')
+
+******************************************************
+* Input buffer chain: two INV_X1
+* - Real path uses VDDIN
+* - Dummy path uses VDDDUMMY
+* INV pin order: .SUBCKT INV_X1 VSS VDD I ZN
+******************************************************
+XBUF1  vss vddin    in_raw in_b1   INV_X1
+XBUF2  vss vddin    in_b1  in_drv  INV_X1
+XDUM1  vss vdddummy in_raw dum_b1  INV_X1
+XDUM2  vss vdddummy dum_b1 dum_drv INV_X1
+
+******************************************************
+* DUT input drives
+******************************************************
+EA A 0 VOL='V(in_drv)'
+EB B 0 VOL='0'
+EC C 0 VOL='0'
+
+******************************************************
+* DUT
+* Assumed DUT pin order: .SUBCKT DUT A B C VDD VSS Z
+******************************************************
+XU_DUT A B C vddcell vss Y THREEINPUT_2STACK_TT10010110
+
+******************************************************
+* Output FO4 load
+* - FO load powered by VDDFO
+******************************************************
+XLOAD0 vss vddfo Y Y_load0 INV_X1
+XLOAD1 vss vddfo Y Y_load1 INV_X1
+XLOAD2 vss vddfo Y Y_load2 INV_X1
+XLOAD3 vss vddfo Y Y_load3 INV_X1
+
+******************************************************
+* Common waveform markers
+******************************************************
+.MEAS TRAN t05_r WHEN V(Y)='0.05*VDD_MAIN' RISE='EDGEIDX'
+.MEAS TRAN t15_r WHEN V(Y)='0.15*VDD_MAIN' RISE='EDGEIDX'
+.MEAS TRAN t30_r WHEN V(Y)='0.3*VDD_MAIN'  RISE='EDGEIDX'
+.MEAS TRAN t50_r WHEN V(Y)='0.5*VDD_MAIN'  RISE='EDGEIDX'
+.MEAS TRAN t70_r WHEN V(Y)='0.7*VDD_MAIN'  RISE='EDGEIDX'
+.MEAS TRAN t85_r WHEN V(Y)='0.85*VDD_MAIN' RISE='EDGEIDX'
+.MEAS TRAN t95_r WHEN V(Y)='0.95*VDD_MAIN' RISE='EDGEIDX'
+.MEAS TRAN t95_f WHEN V(Y)='0.95*VDD_MAIN' FALL='EDGEIDX'
+.MEAS TRAN t85_f WHEN V(Y)='0.85*VDD_MAIN' FALL='EDGEIDX'
+.MEAS TRAN t70_f WHEN V(Y)='0.7*VDD_MAIN'  FALL='EDGEIDX'
+.MEAS TRAN t50_f WHEN V(Y)='0.5*VDD_MAIN'  FALL='EDGEIDX'
+.MEAS TRAN t30_f WHEN V(Y)='0.3*VDD_MAIN'  FALL='EDGEIDX'
+.MEAS TRAN t15_f WHEN V(Y)='0.15*VDD_MAIN' FALL='EDGEIDX'
+.MEAS TRAN t05_f WHEN V(Y)='0.05*VDD_MAIN' FALL='EDGEIDX'
+
+.MEAS TRAN t50_f_pre WHEN V(Y)='0.5*VDD_MAIN' FALL='EDGE_PRE'
+.MEAS TRAN t50_r_nxt WHEN V(Y)='0.5*VDD_MAIN' RISE='EDGE_NXT'
+.MEAS TRAN tLOWmid_pre  PARAM='(t50_f_pre + t50_r)/2'
+.MEAS TRAN tHIGHmid     PARAM='(t50_r + t50_f)/2'
+.MEAS TRAN tLOWmid_post PARAM='(t50_f + t50_r_nxt)/2'
+
+* ----------------------------------------------------
+* Power measurements
+* Final total energy/power is defined as:
+*   total = cell rail + (real input buffer - dummy input buffer)
+* FO load on VDDFO is excluded from the main metric.
+* ----------------------------------------------------
+.MEAS TRAN Pleak0_pre_in_W     AVG PAR(' -V(vddin,vss)*I(VVDDIN) ')       FROM='tLOWmid_pre  -TLEAKWIN/2' TO='tLOWmid_pre  +TLEAKWIN/2'
+.MEAS TRAN Pleak1_in_W         AVG PAR(' -V(vddin,vss)*I(VVDDIN) ')       FROM='tHIGHmid     -TLEAKWIN/2' TO='tHIGHmid     +TLEAKWIN/2'
+.MEAS TRAN Pleak0_post_in_W    AVG PAR(' -V(vddin,vss)*I(VVDDIN) ')       FROM='tLOWmid_post -TLEAKWIN/2' TO='tLOWmid_post +TLEAKWIN/2'
+.MEAS TRAN Pleak0_pre_cellrail_W  AVG PAR(' -V(vddcell,vss)*I(VVDDCELL) ') FROM='tLOWmid_pre  -TLEAKWIN/2' TO='tLOWmid_pre  +TLEAKWIN/2'
+.MEAS TRAN Pleak1_cellrail_W      AVG PAR(' -V(vddcell,vss)*I(VVDDCELL) ') FROM='tHIGHmid     -TLEAKWIN/2' TO='tHIGHmid     +TLEAKWIN/2'
+.MEAS TRAN Pleak0_post_cellrail_W AVG PAR(' -V(vddcell,vss)*I(VVDDCELL) ') FROM='tLOWmid_post -TLEAKWIN/2' TO='tLOWmid_post +TLEAKWIN/2'
+.MEAS TRAN Pleak0_pre_dummy_W  AVG PAR(' -V(vdddummy,vss)*I(VVDDDUMMY) ') FROM='tLOWmid_pre  -TLEAKWIN/2' TO='tLOWmid_pre  +TLEAKWIN/2'
+.MEAS TRAN Pleak1_dummy_W      AVG PAR(' -V(vdddummy,vss)*I(VVDDDUMMY) ') FROM='tHIGHmid     -TLEAKWIN/2' TO='tHIGHmid     +TLEAKWIN/2'
+.MEAS TRAN Pleak0_post_dummy_W AVG PAR(' -V(vdddummy,vss)*I(VVDDDUMMY) ') FROM='tLOWmid_post -TLEAKWIN/2' TO='tLOWmid_post +TLEAKWIN/2'
+.MEAS TRAN Pleak0_pre_incap_W  PARAM='Pleak0_pre_in_W  - Pleak0_pre_dummy_W'
+.MEAS TRAN Pleak1_incap_W      PARAM='Pleak1_in_W      - Pleak1_dummy_W'
+.MEAS TRAN Pleak0_post_incap_W PARAM='Pleak0_post_in_W - Pleak0_post_dummy_W'
+.MEAS TRAN Pleak0_pre_total_W  PARAM='Pleak0_pre_cellrail_W  + Pleak0_pre_incap_W'
+.MEAS TRAN Pleak1_total_W      PARAM='Pleak1_cellrail_W      + Pleak1_incap_W'
+.MEAS TRAN Pleak0_post_total_W PARAM='Pleak0_post_cellrail_W + Pleak0_post_incap_W'
+.MEAS TRAN Pleak0_total_W    PARAM='0.5*(Pleak0_pre_total_W + Pleak0_post_total_W)'
+.MEAS TRAN Pleak_avg_total_W PARAM='0.5*(Pleak0_total_W + Pleak1_total_W)'
+.MEAS TRAN Pleak_avg_nW      PARAM='Pleak_avg_total_W*1e9'
+.MEAS TRAN Eraw_L2H_in_J       INTEG PAR(' -V(vddin,vss)*I(VVDDIN) ')       FROM='tLOWmid_pre' TO='tHIGHmid'
+.MEAS TRAN Eraw_H2L_in_J       INTEG PAR(' -V(vddin,vss)*I(VVDDIN) ')       FROM='tHIGHmid' TO='tLOWmid_post'
+.MEAS TRAN Eraw_L2H_cellrail_J INTEG PAR(' -V(vddcell,vss)*I(VVDDCELL) ')   FROM='tLOWmid_pre' TO='tHIGHmid'
+.MEAS TRAN Eraw_H2L_cellrail_J INTEG PAR(' -V(vddcell,vss)*I(VVDDCELL) ')   FROM='tHIGHmid' TO='tLOWmid_post'
+.MEAS TRAN Eraw_L2H_dummy_J    INTEG PAR(' -V(vdddummy,vss)*I(VVDDDUMMY) ') FROM='tLOWmid_pre' TO='tHIGHmid'
+.MEAS TRAN Eraw_H2L_dummy_J    INTEG PAR(' -V(vdddummy,vss)*I(VVDDDUMMY) ') FROM='tHIGHmid' TO='tLOWmid_post'
+.MEAS TRAN Eraw_L2H_incap_J PARAM='Eraw_L2H_in_J - Eraw_L2H_dummy_J'
+.MEAS TRAN Eraw_H2L_incap_J PARAM='Eraw_H2L_in_J - Eraw_H2L_dummy_J'
+.MEAS TRAN Eraw_L2H_total_J PARAM='Eraw_L2H_cellrail_J + Eraw_L2H_incap_J'
+.MEAS TRAN Eraw_H2L_total_J PARAM='Eraw_H2L_cellrail_J + Eraw_H2L_incap_J'
+.MEAS TRAN Pleak_base_L2H_total_W PARAM='0.5*(Pleak0_pre_total_W + Pleak1_total_W)'
+.MEAS TRAN Pleak_base_H2L_total_W PARAM='0.5*(Pleak1_total_W + Pleak0_post_total_W)'
+.MEAS TRAN Esw_L2H_total_J PARAM='Eraw_L2H_total_J - Pleak_base_L2H_total_W*(tHIGHmid - tLOWmid_pre)'
+.MEAS TRAN Esw_H2L_total_J PARAM='Eraw_H2L_total_J - Pleak_base_H2L_total_W*(tLOWmid_post - tHIGHmid)'
+.MEAS TRAN Esw_avg_total_J  PARAM='0.5*(Esw_L2H_total_J + Esw_H2L_total_J)'
+.MEAS TRAN Esw_avg_fJ       PARAM='Esw_avg_total_J*1e15'
+.MEAS TRAN ErawFO_L2H_J INTEG PAR(' -V(vddfo,vss)*I(VVDDFO) ') FROM='tLOWmid_pre' TO='tHIGHmid'
+.MEAS TRAN ErawFO_H2L_J INTEG PAR(' -V(vddfo,vss)*I(VVDDFO) ') FROM='tHIGHmid' TO='tLOWmid_post'
+
+******************************************************
+* Base case measurements: a_r_b0_c0_yf
+******************************************************
+* Case-specific measurements (fixed names)
+.MEAS TRAN tpd TRIG V(in_drv) VAL='0.5*VDD_MAIN' RISE='EDGEIDX' TARG V(Y) VAL='0.5*VDD_MAIN' FALL='EDGEIDX'
+.MEAS TRAN tran PARAM='t30_f - t70_f'
+.MEAS TRAN esw_fj PARAM='Esw_H2L_total_J*1e15'
+.MEAS TRAN psw_uw PARAM='Esw_H2L_total_J/(tLOWmid_post - tHIGHmid)*1e6'
+.MEAS TRAN peff_nw PARAM='ACT*Esw_H2L_total_J/PER*1e9 + Pleak_avg_total_W*1e9'
+
+******************************************************
+* Analysis
+******************************************************
+.TRAN 0.01p 'TSTOP'
+
+******************************************************
+* a_f_b0_c0_yr
+******************************************************
+.ALTER a_f_b0_c0_yr
+VIN_RAW in_raw 0 PULSE('VDD_MAIN' 0 'TD' 'TR' 'TF' 'THI' 'PER')
+EA A 0 VOL='V(in_drv)'
+EB B 0 VOL='0'
+EC C 0 VOL='0'
+* Case-specific measurements (fixed names)
+.MEAS TRAN tpd TRIG V(in_drv) VAL='0.5*VDD_MAIN' FALL='EDGEIDX' TARG V(Y) VAL='0.5*VDD_MAIN' RISE='EDGEIDX'
+.MEAS TRAN tran PARAM='t70_r - t30_r'
+.MEAS TRAN esw_fj PARAM='Esw_L2H_total_J*1e15'
+.MEAS TRAN psw_uw PARAM='Esw_L2H_total_J/(tHIGHmid - tLOWmid_pre)*1e6'
+.MEAS TRAN peff_nw PARAM='ACT*Esw_L2H_total_J/PER*1e9 + Pleak_avg_total_W*1e9'
+
+******************************************************
+* a_r_b0_c1_yr
+******************************************************
+.ALTER a_r_b0_c1_yr
+VIN_RAW in_raw 0 PULSE(0 'VDD_MAIN' 'TD' 'TR' 'TF' 'THI' 'PER')
+EA A 0 VOL='V(in_drv)'
+EB B 0 VOL='0'
+EC C 0 VOL='VDD_MAIN'
+* Case-specific measurements (fixed names)
+.MEAS TRAN tpd TRIG V(in_drv) VAL='0.5*VDD_MAIN' RISE='EDGEIDX' TARG V(Y) VAL='0.5*VDD_MAIN' RISE='EDGEIDX'
+.MEAS TRAN tran PARAM='t70_r - t30_r'
+.MEAS TRAN esw_fj PARAM='Esw_L2H_total_J*1e15'
+.MEAS TRAN psw_uw PARAM='Esw_L2H_total_J/(tHIGHmid - tLOWmid_pre)*1e6'
+.MEAS TRAN peff_nw PARAM='ACT*Esw_L2H_total_J/PER*1e9 + Pleak_avg_total_W*1e9'
+
+******************************************************
+* a_f_b0_c1_yf
+******************************************************
+.ALTER a_f_b0_c1_yf
+VIN_RAW in_raw 0 PULSE('VDD_MAIN' 0 'TD' 'TR' 'TF' 'THI' 'PER')
+EA A 0 VOL='V(in_drv)'
+EB B 0 VOL='0'
+EC C 0 VOL='VDD_MAIN'
+* Case-specific measurements (fixed names)
+.MEAS TRAN tpd TRIG V(in_drv) VAL='0.5*VDD_MAIN' FALL='EDGEIDX' TARG V(Y) VAL='0.5*VDD_MAIN' FALL='EDGEIDX'
+.MEAS TRAN tran PARAM='t30_f - t70_f'
+.MEAS TRAN esw_fj PARAM='Esw_H2L_total_J*1e15'
+.MEAS TRAN psw_uw PARAM='Esw_H2L_total_J/(tLOWmid_post - tHIGHmid)*1e6'
+.MEAS TRAN peff_nw PARAM='ACT*Esw_H2L_total_J/PER*1e9 + Pleak_avg_total_W*1e9'
+
+******************************************************
+* a_r_b1_c0_yr
+******************************************************
+.ALTER a_r_b1_c0_yr
+VIN_RAW in_raw 0 PULSE(0 'VDD_MAIN' 'TD' 'TR' 'TF' 'THI' 'PER')
+EA A 0 VOL='V(in_drv)'
+EB B 0 VOL='VDD_MAIN'
+EC C 0 VOL='0'
+* Case-specific measurements (fixed names)
+.MEAS TRAN tpd TRIG V(in_drv) VAL='0.5*VDD_MAIN' RISE='EDGEIDX' TARG V(Y) VAL='0.5*VDD_MAIN' RISE='EDGEIDX'
+.MEAS TRAN tran PARAM='t70_r - t30_r'
+.MEAS TRAN esw_fj PARAM='Esw_L2H_total_J*1e15'
+.MEAS TRAN psw_uw PARAM='Esw_L2H_total_J/(tHIGHmid - tLOWmid_pre)*1e6'
+.MEAS TRAN peff_nw PARAM='ACT*Esw_L2H_total_J/PER*1e9 + Pleak_avg_total_W*1e9'
+
+******************************************************
+* a_f_b1_c0_yf
+******************************************************
+.ALTER a_f_b1_c0_yf
+VIN_RAW in_raw 0 PULSE('VDD_MAIN' 0 'TD' 'TR' 'TF' 'THI' 'PER')
+EA A 0 VOL='V(in_drv)'
+EB B 0 VOL='VDD_MAIN'
+EC C 0 VOL='0'
+* Case-specific measurements (fixed names)
+.MEAS TRAN tpd TRIG V(in_drv) VAL='0.5*VDD_MAIN' FALL='EDGEIDX' TARG V(Y) VAL='0.5*VDD_MAIN' FALL='EDGEIDX'
+.MEAS TRAN tran PARAM='t30_f - t70_f'
+.MEAS TRAN esw_fj PARAM='Esw_H2L_total_J*1e15'
+.MEAS TRAN psw_uw PARAM='Esw_H2L_total_J/(tLOWmid_post - tHIGHmid)*1e6'
+.MEAS TRAN peff_nw PARAM='ACT*Esw_H2L_total_J/PER*1e9 + Pleak_avg_total_W*1e9'
+
+******************************************************
+* a_r_b1_c1_yf
+******************************************************
+.ALTER a_r_b1_c1_yf
+VIN_RAW in_raw 0 PULSE(0 'VDD_MAIN' 'TD' 'TR' 'TF' 'THI' 'PER')
+EA A 0 VOL='V(in_drv)'
+EB B 0 VOL='VDD_MAIN'
+EC C 0 VOL='VDD_MAIN'
+* Case-specific measurements (fixed names)
+.MEAS TRAN tpd TRIG V(in_drv) VAL='0.5*VDD_MAIN' RISE='EDGEIDX' TARG V(Y) VAL='0.5*VDD_MAIN' FALL='EDGEIDX'
+.MEAS TRAN tran PARAM='t30_f - t70_f'
+.MEAS TRAN esw_fj PARAM='Esw_H2L_total_J*1e15'
+.MEAS TRAN psw_uw PARAM='Esw_H2L_total_J/(tLOWmid_post - tHIGHmid)*1e6'
+.MEAS TRAN peff_nw PARAM='ACT*Esw_H2L_total_J/PER*1e9 + Pleak_avg_total_W*1e9'
+
+******************************************************
+* a_f_b1_c1_yr
+******************************************************
+.ALTER a_f_b1_c1_yr
+VIN_RAW in_raw 0 PULSE('VDD_MAIN' 0 'TD' 'TR' 'TF' 'THI' 'PER')
+EA A 0 VOL='V(in_drv)'
+EB B 0 VOL='VDD_MAIN'
+EC C 0 VOL='VDD_MAIN'
+* Case-specific measurements (fixed names)
+.MEAS TRAN tpd TRIG V(in_drv) VAL='0.5*VDD_MAIN' FALL='EDGEIDX' TARG V(Y) VAL='0.5*VDD_MAIN' RISE='EDGEIDX'
+.MEAS TRAN tran PARAM='t70_r - t30_r'
+.MEAS TRAN esw_fj PARAM='Esw_L2H_total_J*1e15'
+.MEAS TRAN psw_uw PARAM='Esw_L2H_total_J/(tHIGHmid - tLOWmid_pre)*1e6'
+.MEAS TRAN peff_nw PARAM='ACT*Esw_L2H_total_J/PER*1e9 + Pleak_avg_total_W*1e9'
+
+******************************************************
+* b_r_a0_c0_yf
+******************************************************
+.ALTER b_r_a0_c0_yf
+VIN_RAW in_raw 0 PULSE(0 'VDD_MAIN' 'TD' 'TR' 'TF' 'THI' 'PER')
+EA A 0 VOL='0'
+EB B 0 VOL='V(in_drv)'
+EC C 0 VOL='0'
+* Case-specific measurements (fixed names)
+.MEAS TRAN tpd TRIG V(in_drv) VAL='0.5*VDD_MAIN' RISE='EDGEIDX' TARG V(Y) VAL='0.5*VDD_MAIN' FALL='EDGEIDX'
+.MEAS TRAN tran PARAM='t30_f - t70_f'
+.MEAS TRAN esw_fj PARAM='Esw_H2L_total_J*1e15'
+.MEAS TRAN psw_uw PARAM='Esw_H2L_total_J/(tLOWmid_post - tHIGHmid)*1e6'
+.MEAS TRAN peff_nw PARAM='ACT*Esw_H2L_total_J/PER*1e9 + Pleak_avg_total_W*1e9'
+
+******************************************************
+* b_f_a0_c0_yr
+******************************************************
+.ALTER b_f_a0_c0_yr
+VIN_RAW in_raw 0 PULSE('VDD_MAIN' 0 'TD' 'TR' 'TF' 'THI' 'PER')
+EA A 0 VOL='0'
+EB B 0 VOL='V(in_drv)'
+EC C 0 VOL='0'
+* Case-specific measurements (fixed names)
+.MEAS TRAN tpd TRIG V(in_drv) VAL='0.5*VDD_MAIN' FALL='EDGEIDX' TARG V(Y) VAL='0.5*VDD_MAIN' RISE='EDGEIDX'
+.MEAS TRAN tran PARAM='t70_r - t30_r'
+.MEAS TRAN esw_fj PARAM='Esw_L2H_total_J*1e15'
+.MEAS TRAN psw_uw PARAM='Esw_L2H_total_J/(tHIGHmid - tLOWmid_pre)*1e6'
+.MEAS TRAN peff_nw PARAM='ACT*Esw_L2H_total_J/PER*1e9 + Pleak_avg_total_W*1e9'
+
+******************************************************
+* b_r_a0_c1_yr
+******************************************************
+.ALTER b_r_a0_c1_yr
+VIN_RAW in_raw 0 PULSE(0 'VDD_MAIN' 'TD' 'TR' 'TF' 'THI' 'PER')
+EA A 0 VOL='0'
+EB B 0 VOL='V(in_drv)'
+EC C 0 VOL='VDD_MAIN'
+* Case-specific measurements (fixed names)
+.MEAS TRAN tpd TRIG V(in_drv) VAL='0.5*VDD_MAIN' RISE='EDGEIDX' TARG V(Y) VAL='0.5*VDD_MAIN' RISE='EDGEIDX'
+.MEAS TRAN tran PARAM='t70_r - t30_r'
+.MEAS TRAN esw_fj PARAM='Esw_L2H_total_J*1e15'
+.MEAS TRAN psw_uw PARAM='Esw_L2H_total_J/(tHIGHmid - tLOWmid_pre)*1e6'
+.MEAS TRAN peff_nw PARAM='ACT*Esw_L2H_total_J/PER*1e9 + Pleak_avg_total_W*1e9'
+
+******************************************************
+* b_f_a0_c1_yf
+******************************************************
+.ALTER b_f_a0_c1_yf
+VIN_RAW in_raw 0 PULSE('VDD_MAIN' 0 'TD' 'TR' 'TF' 'THI' 'PER')
+EA A 0 VOL='0'
+EB B 0 VOL='V(in_drv)'
+EC C 0 VOL='VDD_MAIN'
+* Case-specific measurements (fixed names)
+.MEAS TRAN tpd TRIG V(in_drv) VAL='0.5*VDD_MAIN' FALL='EDGEIDX' TARG V(Y) VAL='0.5*VDD_MAIN' FALL='EDGEIDX'
+.MEAS TRAN tran PARAM='t30_f - t70_f'
+.MEAS TRAN esw_fj PARAM='Esw_H2L_total_J*1e15'
+.MEAS TRAN psw_uw PARAM='Esw_H2L_total_J/(tLOWmid_post - tHIGHmid)*1e6'
+.MEAS TRAN peff_nw PARAM='ACT*Esw_H2L_total_J/PER*1e9 + Pleak_avg_total_W*1e9'
+
+******************************************************
+* b_r_a1_c0_yr
+******************************************************
+.ALTER b_r_a1_c0_yr
+VIN_RAW in_raw 0 PULSE(0 'VDD_MAIN' 'TD' 'TR' 'TF' 'THI' 'PER')
+EA A 0 VOL='VDD_MAIN'
+EB B 0 VOL='V(in_drv)'
+EC C 0 VOL='0'
+* Case-specific measurements (fixed names)
+.MEAS TRAN tpd TRIG V(in_drv) VAL='0.5*VDD_MAIN' RISE='EDGEIDX' TARG V(Y) VAL='0.5*VDD_MAIN' RISE='EDGEIDX'
+.MEAS TRAN tran PARAM='t70_r - t30_r'
+.MEAS TRAN esw_fj PARAM='Esw_L2H_total_J*1e15'
+.MEAS TRAN psw_uw PARAM='Esw_L2H_total_J/(tHIGHmid - tLOWmid_pre)*1e6'
+.MEAS TRAN peff_nw PARAM='ACT*Esw_L2H_total_J/PER*1e9 + Pleak_avg_total_W*1e9'
+
+******************************************************
+* b_f_a1_c0_yf
+******************************************************
+.ALTER b_f_a1_c0_yf
+VIN_RAW in_raw 0 PULSE('VDD_MAIN' 0 'TD' 'TR' 'TF' 'THI' 'PER')
+EA A 0 VOL='VDD_MAIN'
+EB B 0 VOL='V(in_drv)'
+EC C 0 VOL='0'
+* Case-specific measurements (fixed names)
+.MEAS TRAN tpd TRIG V(in_drv) VAL='0.5*VDD_MAIN' FALL='EDGEIDX' TARG V(Y) VAL='0.5*VDD_MAIN' FALL='EDGEIDX'
+.MEAS TRAN tran PARAM='t30_f - t70_f'
+.MEAS TRAN esw_fj PARAM='Esw_H2L_total_J*1e15'
+.MEAS TRAN psw_uw PARAM='Esw_H2L_total_J/(tLOWmid_post - tHIGHmid)*1e6'
+.MEAS TRAN peff_nw PARAM='ACT*Esw_H2L_total_J/PER*1e9 + Pleak_avg_total_W*1e9'
+
+******************************************************
+* b_r_a1_c1_yf
+******************************************************
+.ALTER b_r_a1_c1_yf
+VIN_RAW in_raw 0 PULSE(0 'VDD_MAIN' 'TD' 'TR' 'TF' 'THI' 'PER')
+EA A 0 VOL='VDD_MAIN'
+EB B 0 VOL='V(in_drv)'
+EC C 0 VOL='VDD_MAIN'
+* Case-specific measurements (fixed names)
+.MEAS TRAN tpd TRIG V(in_drv) VAL='0.5*VDD_MAIN' RISE='EDGEIDX' TARG V(Y) VAL='0.5*VDD_MAIN' FALL='EDGEIDX'
+.MEAS TRAN tran PARAM='t30_f - t70_f'
+.MEAS TRAN esw_fj PARAM='Esw_H2L_total_J*1e15'
+.MEAS TRAN psw_uw PARAM='Esw_H2L_total_J/(tLOWmid_post - tHIGHmid)*1e6'
+.MEAS TRAN peff_nw PARAM='ACT*Esw_H2L_total_J/PER*1e9 + Pleak_avg_total_W*1e9'
+
+******************************************************
+* b_f_a1_c1_yr
+******************************************************
+.ALTER b_f_a1_c1_yr
+VIN_RAW in_raw 0 PULSE('VDD_MAIN' 0 'TD' 'TR' 'TF' 'THI' 'PER')
+EA A 0 VOL='VDD_MAIN'
+EB B 0 VOL='V(in_drv)'
+EC C 0 VOL='VDD_MAIN'
+* Case-specific measurements (fixed names)
+.MEAS TRAN tpd TRIG V(in_drv) VAL='0.5*VDD_MAIN' FALL='EDGEIDX' TARG V(Y) VAL='0.5*VDD_MAIN' RISE='EDGEIDX'
+.MEAS TRAN tran PARAM='t70_r - t30_r'
+.MEAS TRAN esw_fj PARAM='Esw_L2H_total_J*1e15'
+.MEAS TRAN psw_uw PARAM='Esw_L2H_total_J/(tHIGHmid - tLOWmid_pre)*1e6'
+.MEAS TRAN peff_nw PARAM='ACT*Esw_L2H_total_J/PER*1e9 + Pleak_avg_total_W*1e9'
+
+******************************************************
+* c_r_a0_b0_yf
+******************************************************
+.ALTER c_r_a0_b0_yf
+VIN_RAW in_raw 0 PULSE(0 'VDD_MAIN' 'TD' 'TR' 'TF' 'THI' 'PER')
+EA A 0 VOL='0'
+EB B 0 VOL='0'
+EC C 0 VOL='V(in_drv)'
+* Case-specific measurements (fixed names)
+.MEAS TRAN tpd TRIG V(in_drv) VAL='0.5*VDD_MAIN' RISE='EDGEIDX' TARG V(Y) VAL='0.5*VDD_MAIN' FALL='EDGEIDX'
+.MEAS TRAN tran PARAM='t30_f - t70_f'
+.MEAS TRAN esw_fj PARAM='Esw_H2L_total_J*1e15'
+.MEAS TRAN psw_uw PARAM='Esw_H2L_total_J/(tLOWmid_post - tHIGHmid)*1e6'
+.MEAS TRAN peff_nw PARAM='ACT*Esw_H2L_total_J/PER*1e9 + Pleak_avg_total_W*1e9'
+
+******************************************************
+* c_f_a0_b0_yr
+******************************************************
+.ALTER c_f_a0_b0_yr
+VIN_RAW in_raw 0 PULSE('VDD_MAIN' 0 'TD' 'TR' 'TF' 'THI' 'PER')
+EA A 0 VOL='0'
+EB B 0 VOL='0'
+EC C 0 VOL='V(in_drv)'
+* Case-specific measurements (fixed names)
+.MEAS TRAN tpd TRIG V(in_drv) VAL='0.5*VDD_MAIN' FALL='EDGEIDX' TARG V(Y) VAL='0.5*VDD_MAIN' RISE='EDGEIDX'
+.MEAS TRAN tran PARAM='t70_r - t30_r'
+.MEAS TRAN esw_fj PARAM='Esw_L2H_total_J*1e15'
+.MEAS TRAN psw_uw PARAM='Esw_L2H_total_J/(tHIGHmid - tLOWmid_pre)*1e6'
+.MEAS TRAN peff_nw PARAM='ACT*Esw_L2H_total_J/PER*1e9 + Pleak_avg_total_W*1e9'
+
+******************************************************
+* c_r_a0_b1_yr
+******************************************************
+.ALTER c_r_a0_b1_yr
+VIN_RAW in_raw 0 PULSE(0 'VDD_MAIN' 'TD' 'TR' 'TF' 'THI' 'PER')
+EA A 0 VOL='0'
+EB B 0 VOL='VDD_MAIN'
+EC C 0 VOL='V(in_drv)'
+* Case-specific measurements (fixed names)
+.MEAS TRAN tpd TRIG V(in_drv) VAL='0.5*VDD_MAIN' RISE='EDGEIDX' TARG V(Y) VAL='0.5*VDD_MAIN' RISE='EDGEIDX'
+.MEAS TRAN tran PARAM='t70_r - t30_r'
+.MEAS TRAN esw_fj PARAM='Esw_L2H_total_J*1e15'
+.MEAS TRAN psw_uw PARAM='Esw_L2H_total_J/(tHIGHmid - tLOWmid_pre)*1e6'
+.MEAS TRAN peff_nw PARAM='ACT*Esw_L2H_total_J/PER*1e9 + Pleak_avg_total_W*1e9'
+
+******************************************************
+* c_f_a0_b1_yf
+******************************************************
+.ALTER c_f_a0_b1_yf
+VIN_RAW in_raw 0 PULSE('VDD_MAIN' 0 'TD' 'TR' 'TF' 'THI' 'PER')
+EA A 0 VOL='0'
+EB B 0 VOL='VDD_MAIN'
+EC C 0 VOL='V(in_drv)'
+* Case-specific measurements (fixed names)
+.MEAS TRAN tpd TRIG V(in_drv) VAL='0.5*VDD_MAIN' FALL='EDGEIDX' TARG V(Y) VAL='0.5*VDD_MAIN' FALL='EDGEIDX'
+.MEAS TRAN tran PARAM='t30_f - t70_f'
+.MEAS TRAN esw_fj PARAM='Esw_H2L_total_J*1e15'
+.MEAS TRAN psw_uw PARAM='Esw_H2L_total_J/(tLOWmid_post - tHIGHmid)*1e6'
+.MEAS TRAN peff_nw PARAM='ACT*Esw_H2L_total_J/PER*1e9 + Pleak_avg_total_W*1e9'
+
+******************************************************
+* c_r_a1_b0_yr
+******************************************************
+.ALTER c_r_a1_b0_yr
+VIN_RAW in_raw 0 PULSE(0 'VDD_MAIN' 'TD' 'TR' 'TF' 'THI' 'PER')
+EA A 0 VOL='VDD_MAIN'
+EB B 0 VOL='0'
+EC C 0 VOL='V(in_drv)'
+* Case-specific measurements (fixed names)
+.MEAS TRAN tpd TRIG V(in_drv) VAL='0.5*VDD_MAIN' RISE='EDGEIDX' TARG V(Y) VAL='0.5*VDD_MAIN' RISE='EDGEIDX'
+.MEAS TRAN tran PARAM='t70_r - t30_r'
+.MEAS TRAN esw_fj PARAM='Esw_L2H_total_J*1e15'
+.MEAS TRAN psw_uw PARAM='Esw_L2H_total_J/(tHIGHmid - tLOWmid_pre)*1e6'
+.MEAS TRAN peff_nw PARAM='ACT*Esw_L2H_total_J/PER*1e9 + Pleak_avg_total_W*1e9'
+
+******************************************************
+* c_f_a1_b0_yf
+******************************************************
+.ALTER c_f_a1_b0_yf
+VIN_RAW in_raw 0 PULSE('VDD_MAIN' 0 'TD' 'TR' 'TF' 'THI' 'PER')
+EA A 0 VOL='VDD_MAIN'
+EB B 0 VOL='0'
+EC C 0 VOL='V(in_drv)'
+* Case-specific measurements (fixed names)
+.MEAS TRAN tpd TRIG V(in_drv) VAL='0.5*VDD_MAIN' FALL='EDGEIDX' TARG V(Y) VAL='0.5*VDD_MAIN' FALL='EDGEIDX'
+.MEAS TRAN tran PARAM='t30_f - t70_f'
+.MEAS TRAN esw_fj PARAM='Esw_H2L_total_J*1e15'
+.MEAS TRAN psw_uw PARAM='Esw_H2L_total_J/(tLOWmid_post - tHIGHmid)*1e6'
+.MEAS TRAN peff_nw PARAM='ACT*Esw_H2L_total_J/PER*1e9 + Pleak_avg_total_W*1e9'
+
+******************************************************
+* c_r_a1_b1_yf
+******************************************************
+.ALTER c_r_a1_b1_yf
+VIN_RAW in_raw 0 PULSE(0 'VDD_MAIN' 'TD' 'TR' 'TF' 'THI' 'PER')
+EA A 0 VOL='VDD_MAIN'
+EB B 0 VOL='VDD_MAIN'
+EC C 0 VOL='V(in_drv)'
+* Case-specific measurements (fixed names)
+.MEAS TRAN tpd TRIG V(in_drv) VAL='0.5*VDD_MAIN' RISE='EDGEIDX' TARG V(Y) VAL='0.5*VDD_MAIN' FALL='EDGEIDX'
+.MEAS TRAN tran PARAM='t30_f - t70_f'
+.MEAS TRAN esw_fj PARAM='Esw_H2L_total_J*1e15'
+.MEAS TRAN psw_uw PARAM='Esw_H2L_total_J/(tLOWmid_post - tHIGHmid)*1e6'
+.MEAS TRAN peff_nw PARAM='ACT*Esw_H2L_total_J/PER*1e9 + Pleak_avg_total_W*1e9'
+
+******************************************************
+* c_f_a1_b1_yr
+******************************************************
+.ALTER c_f_a1_b1_yr
+VIN_RAW in_raw 0 PULSE('VDD_MAIN' 0 'TD' 'TR' 'TF' 'THI' 'PER')
+EA A 0 VOL='VDD_MAIN'
+EB B 0 VOL='VDD_MAIN'
+EC C 0 VOL='V(in_drv)'
+* Case-specific measurements (fixed names)
+.MEAS TRAN tpd TRIG V(in_drv) VAL='0.5*VDD_MAIN' FALL='EDGEIDX' TARG V(Y) VAL='0.5*VDD_MAIN' RISE='EDGEIDX'
+.MEAS TRAN tran PARAM='t70_r - t30_r'
+.MEAS TRAN esw_fj PARAM='Esw_L2H_total_J*1e15'
+.MEAS TRAN psw_uw PARAM='Esw_L2H_total_J/(tHIGHmid - tLOWmid_pre)*1e6'
+.MEAS TRAN peff_nw PARAM='ACT*Esw_L2H_total_J/PER*1e9 + Pleak_avg_total_W*1e9'
+
+.END

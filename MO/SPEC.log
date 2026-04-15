@@ -1,0 +1,7 @@
+========================================
+=== Solution summary (1 solution(s)) ===
+solution[0]: #tr=44, #nets=22, #stages=3 (num_stages=3)
+ - stage 1 : (1_n:n2,A,n4) (1_n:VSS,B,n3) (1_n:n2,B,n4) (1_n:VSS,C,n2) (1_n:n2,C,n3) (1_n:VSS,D,n5) (1_p:VDD,A,n1) (1_p:n1,B,n4) (1_p:n2,B,n3) (1_p:VDD,C,n1) (1_p:VDD,C,n4) (1_p:n1,C,n2) (1_p:n1,C,n4) (1_p:n2,C,n4) (1_p:VDD,D,n5) (1_p:VDD,D,n6) (1_p:n5,D,n6)
+ - stage 2 : (2_n:n2,A,n10) (2_n:n3,A,n8) (2_n:n3,C,n9) (2_n:n4,D,n10) (2_n:VSS,n3,n9) (2_n:n3,n4,n8) (2_p:n3,C,n8) (2_p:n1,n2,n7) (2_p:n2,n3,n9) (2_p:n7,n4,n8)
+ - stage 3 : (3_n:n10,C,Y3) (3_n:n9,D,Y1) (3_n:n9,n2,Y3) (3_n:n12,n3,Y2) (3_n:VSS,n5,n12) (3_n:n9,n8,Y) (3_n:n12,n8,Y2) (3_n:n5,n9,Y2) (3_n:n12,n9,Y1) (3_p:n7,D,Y3) (3_p:VDD,n5,n11) (3_p:n9,n5,Y1) (3_p:VDD,n8,Y) (3_p:n1,n8,Y3) (3_p:n6,n8,Y2) (3_p:n5,n9,Y1) (3_p:n11,n9,Y2)
+========================================
