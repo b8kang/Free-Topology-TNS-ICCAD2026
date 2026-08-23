@@ -1,7 +1,184 @@
+
+[bgkang@localhost build0407]$ ./run_symmetry_breaking -input ABCD -outs 4 -tts 0011110000111111,1010011010100110,0111100101111011,0011111000001100 -stages 4 -allow_float false -debugforeasy yes -mintr 43 -maxtr 43 -timeout 28800 -maxnet_once no -net_multi_sol no -painless yes -painless_bin ../painless/build/release/painless_release -max_pn_diff 1 -painless_args "-c=8 -solver=kkkccIMl -v=1 -ga-seed=1 -max-div-noise=1000 -shr-strat=1 -shr-sleep=500000"
+Multi-output truth tables:
+  Y : 0011110000111111
+  Y1 : 1010011010100110
+  Y2 : 0111100101111011
+  Y3 : 0011111000001100
+
+==================================================
+Trying with num_tr = 43
+  Trying with num_stages = 1
+    Trying with num_net = 11
+      Solve result = UNSAT(painless), time = 13.06 s
+    Trying with num_net = 12
+      Solve result = UNSAT(painless), time = 13.66 s
+    Trying with num_net = 13
+      Solve result = UNSAT(painless), time = 14.74 s
+    Trying with num_net = 14
+      Solve result = UNSAT(painless), time = 14.91 s
+    Trying with num_net = 15
+      Solve result = UNSAT(painless), time = 15.69 s
+    Trying with num_net = 16
+      Solve result = UNSAT(painless), time = 16.79 s
+    Trying with num_net = 17
+      Solve result = UNSAT(painless), time = 17.38 s
+    Trying with num_net = 18
+      Solve result = UNSAT(painless), time = 18.09 s
+    Trying with num_net = 19
+      Solve result = UNSAT(painless), time = 19.21 s
+    Trying with num_net = 20
+      Solve result = UNSAT(painless), time = 19.97 s
+    Trying with num_net = 21
+      Solve result = UNSAT(painless), time = 20.15 s
+    Trying with num_net = 22
+      Solve result = UNSAT(painless), time = 20.91 s
+    Trying with num_net = 23
+      Solve result = UNSAT(painless), time = 21.50 s
+    Trying with num_net = 24
+      Solve result = UNSAT(painless), time = 22.27 s
+    Trying with num_net = 25
+      Solve result = UNSAT(painless), time = 23.60 s
+    Trying with num_net = 26
+      Solve result = UNSAT(painless), time = 23.91 s
+    Trying with num_net = 27
+      Solve result = UNSAT(painless), time = 25.43 s
+    Trying with num_net = 28
+      Solve result = UNSAT(painless), time = 25.64 s
+    Trying with num_net = 29
+      Solve result = UNSAT(painless), time = 26.74 s
+    Trying with num_net = 30
+      Solve result = UNSAT(painless), time = 27.70 s
+    Trying with num_net = 31
+      Solve result = UNSAT(painless), time = 28.69 s
+    Trying with num_net = 32
+      Solve result = UNSAT(painless), time = 28.63 s
+    Trying with num_net = 33
+      Solve result = UNSAT(painless), time = 30.40 s
+    Trying with num_net = 34
+      Solve result = UNSAT(painless), time = 30.20 s
+    Trying with num_net = 35
+      Solve result = UNSAT(painless), time = 31.45 s
+  Trying with num_stages = 2
+    Trying with num_net = 11
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 12
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 13
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 14
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 15
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 16
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 17
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 18
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 19
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 20
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 21
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 22
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 23
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 24
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 25
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 26
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 27
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 28
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 29
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 30
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 31
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 32
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 33
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 34
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 35
+      Solve result = UNKNOWN(painless), time = 8.00 h
+  Trying with num_stages = 3
+    Trying with num_net = 11
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 12
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 13
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 14
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 15
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 16
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 17
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 18
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 19
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 20
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 21
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 22
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 23
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 24
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 25
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 26
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 27
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 28
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 29
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 30
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 31
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 32
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 33
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 34
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 35
+      Solve result = UNKNOWN(painless), time = 8.00 h
+  Trying with num_stages = 4
+    Trying with num_net = 11
+      Solve result = UNKNOWN(painless), time = 8.00 h
+    Trying with num_net = 12
+      Solve result = SAT(painless), time = 5.03 h
+Solution found!
+  Stop at num_net = 12 for this (tr,stages).
+  Stop at num_stages = 4 for this pattern.
+Finish num_tr = 43 (found_for_pattern=true)
+Has solution: yes
+
 ========================================
 === Solution summary (1 solution(s)) ===
-solution[0]: #tr=44, #nets=22, #stages=3 (num_stages=3)
- - stage 1 : (1_n:n2,A,n4) (1_n:VSS,B,n3) (1_n:n2,B,n4) (1_n:VSS,C,n2) (1_n:n2,C,n3) (1_n:VSS,D,n5) (1_p:VDD,A,n1) (1_p:n1,B,n4) (1_p:n2,B,n3) (1_p:VDD,C,n1) (1_p:VDD,C,n4) (1_p:n1,C,n2) (1_p:n1,C,n4) (1_p:n2,C,n4) (1_p:VDD,D,n5) (1_p:VDD,D,n6) (1_p:n5,D,n6)
- - stage 2 : (2_n:n2,A,n10) (2_n:n3,A,n8) (2_n:n3,C,n9) (2_n:n4,D,n10) (2_n:VSS,n3,n9) (2_n:n3,n4,n8) (2_p:n3,C,n8) (2_p:n1,n2,n7) (2_p:n2,n3,n9) (2_p:n7,n4,n8)
- - stage 3 : (3_n:n10,C,Y3) (3_n:n9,D,Y1) (3_n:n9,n2,Y3) (3_n:n12,n3,Y2) (3_n:VSS,n5,n12) (3_n:n9,n8,Y) (3_n:n12,n8,Y2) (3_n:n5,n9,Y2) (3_n:n12,n9,Y1) (3_p:n7,D,Y3) (3_p:VDD,n5,n11) (3_p:n9,n5,Y1) (3_p:VDD,n8,Y) (3_p:n1,n8,Y3) (3_p:n6,n8,Y2) (3_p:n5,n9,Y1) (3_p:n11,n9,Y2)
+solution[0]: #tr=43, #nets=22, #stages=4 (num_stages=4)
+ - stage 1 : (1_n:VSS,B,n8) (1_n:n4,B,n6) (1_n:VSS,C,n7) (1_n:n3,C,n4) (1_n:n4,C,n7) (1_n:n7,C,n8) (1_n:VSS,D,n3) (1_n:VSS,D,n9) (1_p:VDD,A,n5) (1_p:VDD,B,n6) (1_p:n4,B,n8) (1_p:VDD,C,n1) (1_p:VDD,C,n2) (1_p:n1,C,n6) (1_p:n2,C,n4) (1_p:n4,C,n5) (1_p:VDD,D,n2) (1_p:VDD,D,n9)
+ - stage 2 : (2_n:n8,A,n11) (2_n:n9,C,n10) (2_n:n8,n6,n11) (2_n:n3,n8,n10) (2_p:n1,B,n11) (2_p:n5,n6,n11) (2_p:n9,n6,n10) (2_p:n2,n8,n10)
+ - stage 3 : (3_n:n10,D,n12) (3_n:n11,n9,n12) (3_p:n11,D,n12) (3_p:n10,n9,n12)
+ - stage 4 : (4_n:n7,A,Y3) (4_n:n10,D,Y1) (4_n:n12,n4,Y1) (4_n:VSS,n8,Y3) (4_n:VSS,n11,Y) (4_n:n10,n11,Y3) (4_n:VSS,n12,Y2) (4_p:n12,C,Y1) (4_p:n10,n4,Y1) (4_p:n12,n6,Y3) (4_p:VDD,n11,Y) (4_p:n5,n11,Y3) (4_p:VDD,n12,Y2)
 ========================================
+
+Total execution time: 1488956.42 seconds

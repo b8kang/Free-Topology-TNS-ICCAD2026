@@ -1,0 +1,42 @@
+# OS/editor noise
+.DS_Store
+Thumbs.db
+*~
+*.swp
+*.swo
+
+# Local environment files
+.env
+.env.*
+!.env.example
+
+# Python/cache artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Generic build products
+build/
+dist/
+*.o
+*.so
+*.dylib
+*.dll
+*.exe
+
+# Crash/core dumps and scratch files
+core
+core.*
+*.tmp
+*.temp
+*.bak
+
+# Solver/simulator scratch directories
+scratch/
+tmp/
+work/
+
+# Local archival copies retained outside the public release
+/old_backup/
