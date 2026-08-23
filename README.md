@@ -166,6 +166,18 @@ The numerical results and generated circuit data are preserved as checked-in art
 - Generated HSPICE decks may require additional include files, model decks, or standard-cell definitions that are not shipped in this repository.
 - The final paper PDF is intentionally absent until the camera-ready version is finalized.
 
+## Related Work
+
+- W. Xiao, S. Han, Y. Yang, S. Yang, C. Zheng, J. Chen, T. Liang, L. Li, and W. Qian,
+  "MiniTNtk: An Exact Synthesis-based Method for Minimizing Transistor Network,"
+  IEEE/ACM International Conference on Computer-Aided Design (ICCAD), 2023.
+  DOI: https://doi.org/10.1109/ICCAD57390.2023.10323691
+
+- B. Kang, A. Mishchenko, M. Fujita, B. Lin, and C.-K. Cheng,
+  "L2L: Logic to Layout Exploration of Standard Cell Library Design,"
+  63rd ACM/IEEE Design Automation Conference (DAC), 2026.
+  DOI: https://doi.org/10.1145/3770743.3804220
+
 ## Citation
 
 ACM citation:
