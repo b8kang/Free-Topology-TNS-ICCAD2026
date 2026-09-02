@@ -141,6 +141,8 @@ BAR1.log
 BAR2.log
 GUR2.log
 SPEC.log
+STE1.log
+STE3.log
 ```
 
 `SPEC.log` contains the original command line and final solution summary for the verified 43-transistor, 4-stage SPEC case. The synthesis used a maximum of four stages and the default maximum stack height of four. All four outputs were independently checked against their target truth tables with the switch-level functionality checker.
