@@ -170,11 +170,10 @@
     .artifact-grid strong { display: block; }
     .artifact-grid span { color: var(--muted); }
 
-    .paper-row {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 170px;
-      gap: 32px;
-      align-items: start;
+    .paper-row > a {
+      display: block;
+      width: min(500px, 90%);
+      margin: 32px auto 0;
     }
 
     .preview {
@@ -201,9 +200,7 @@
       header { padding: 48px 0 38px; }
       h1 { font-size: 2rem; }
       main section { padding: 38px 0; }
-      .artifact-grid, .paper-row { grid-template-columns: 1fr; }
-      .paper-row { gap: 28px; }
-      .preview { width: min(200px, 100%); }
+      .artifact-grid { grid-template-columns: 1fr; }
       .actions { display: grid; grid-template-columns: 1fr; }
       .button { width: 100%; justify-content: center; }
     }
