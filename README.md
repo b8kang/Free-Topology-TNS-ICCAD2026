@@ -72,8 +72,8 @@ Some solver logs retain command lines or build-directory names as execution prov
 ## Related Work
 
 - D. Kagaris, "MOTO-X: A Multiple-Output Transistor-Level Synthesis CAD Tool," *IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems*, pp. 114--127, 2015. DOI: [10.1109/TCAD.2015.2448675](https://doi.org/10.1109/TCAD.2015.2448675)
-- W. Xiao et al., "MiniTNtk: An Exact Synthesis-based Method for Minimizing Transistor Network," *IEEE/ACM International Conference on Computer-Aided Design (ICCAD)*, 2023. DOI: [10.1109/ICCAD57390.2023.10323691](https://doi.org/10.1109/ICCAD57390.2023.10323691)
-- B. Kang et al., "L2L: Logic to Layout Exploration of Standard Cell Library Design," *ACM/IEEE Design Automation Conference (DAC)*, 2026. DOI: [10.1145/3770743.3804220](https://doi.org/10.1145/3770743.3804220)
+- W. Xiao et al., "MiniTNtk: An Exact Synthesis-based Method for Minimizing Transistor Network," *IEEE/ACM International Conference on Computer-Aided Design (ICCAD)*, 2023. DOI: [10.1109/ICCAD57390.2023.10323691](https://doi.org/10.1109/ICCAD57390.2023.10323691) | [GitHub](https://github.com/FCHXWH/MiniTNtk-An-Exact-Synthesis-based-Method-for-Minimizing-Transistor-Network)
+- B. Kang et al., "L2L: Logic to Layout Exploration of Standard Cell Library Design," *ACM/IEEE Design Automation Conference (DAC)*, 2026. DOI: [10.1145/3770743.3804220](https://doi.org/10.1145/3770743.3804220) | [GitHub](https://github.com/b8kang/L2L-Logic_to_Layout_Exploration)
 
 ## Citation
 
