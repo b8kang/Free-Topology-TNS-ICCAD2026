@@ -57,8 +57,6 @@ AGR1.log  AGR2.log  BAR1.log  BAR2.log  FADD.log
 GUR2.log  SPEC.log  STE1.log  STE3.log
 ```
 
-`SPEC.log` records the final 43-transistor, 4-stage SPEC result under a maximum stack height of four. Its four outputs were checked against their target truth tables with the switch-level functionality checker.
-
 ### `docs/`
 
 Source files for the GitHub Pages project page and a public copy of the camera-ready paper.

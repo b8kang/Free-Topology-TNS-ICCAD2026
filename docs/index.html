@@ -153,6 +153,10 @@
 
     .lead { max-width: 780px; margin: 0; font-size: 1.08rem; }
 
+    .abstract { max-width: 780px; }
+    .abstract p { margin: 0 0 1em; }
+    .abstract p:last-child { margin-bottom: 0; }
+
     .artifact-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -222,9 +226,11 @@
 
   <main>
     <section>
-      <div class="wrap">
-        <h2>Overview</h2>
-        <p class="lead">This work studies SAT-based synthesis of free-topology transistor networks under configurable stack-height, multi-stage, and multi-output options. This release preserves the generated circuits, simulation decks, and selected synthesis results associated with the paper; the complete synthesis implementation is not included.</p>
+      <div class="wrap abstract">
+        <h2>Abstract</h2>
+        <p>Transistor-network synthesis is important for generating compact circuit implementations, and flexible synthesis options can directly affect standard-cell quality.</p>
+        <p>We propose a SAT-based exact synthesis framework for <em>free-topology</em> transistor networks that allows internal nets generated in one stage to be reused only by subnetworks in subsequent stages under an acyclic constraint. The framework jointly supports stack-height-constrained multi-stage synthesis and multi-output synthesis, together with design-space pruning techniques including structural constraints, symmetry breaking, and tighter internal-net bounds.</p>
+        <p>Experiments validate the framework on 3-input P-class functions, the 53-function NSP benchmark, and multi-output functions. Under a 4-stack constraint, the proposed method reduces transistor count by 21% over MiniTNtk [22] on 3-input P-class functions, matches the known optimum on the NSP benchmark [9] under a relaxed stack-height bound, and improves or matches the best reported counts on selected multi-output benchmarks. Circuit-level simulations also show improved delay-power-area (DPA) compared with prior 3-input implementations, with best improvements of 64.8% over MiniTNtk [22] and 50.9% over L2L [14]. Under a stricter 2-stack setting, the framework still covers all 3-input P-class functions, trading 10.7% transistor overhead for improved rise/fall balance. Design-space pruning reduces normalized runtime by 53.6&ndash;97.7% across the evaluated cases.</p>
       </div>
     </section>
 
@@ -249,7 +255,7 @@
           <a class="button primary" href="FreeTopologyTNS_ICCAD2026.pdf">Open PDF</a>
         </div>
         <a href="FreeTopologyTNS_ICCAD2026.pdf" aria-label="Open the camera-ready paper">
-          <img class="preview" src="paper-preview.png" alt="First page of the ICCAD 2026 paper" width="935" height="1210">
+          <img class="preview" src="paper-preview.png" alt="Comparison of transistor-level XOR3 implementations" width="1046" height="910">
         </a>
       </div>
     </section>
