@@ -40,3 +40,6 @@ work/
 
 # Local archival copies retained outside the public release
 /old_backup/
+
+# Local Codex session data; never publish
+/codex

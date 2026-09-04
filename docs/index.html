@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Free-Topology TNS | ICCAD 2026</title>
+  <meta name="description" content="Project page and released artifacts for the ICCAD 2026 paper on SAT-based free-topology transistor network synthesis.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://b8kang.github.io/Free-Topology-TNS-ICCAD2026/">
+
+  <meta property="og:title" content="SAT-Based Free-Topology Transistor Network Synthesis | ICCAD 2026">
+  <meta property="og:description" content="Paper and research artifacts for SAT-based free-topology transistor network synthesis under stack-height, multi-stage, and multi-output options.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://b8kang.github.io/Free-Topology-TNS-ICCAD2026/">
+  <meta name="twitter:card" content="summary">
+
+  <meta name="citation_title" content="SAT-Based Free-Topology Transistor Network Synthesis under Stack-Height, Multi-Stage and Multi-Output Options">
+  <meta name="citation_author" content="Kang, Byeonggon">
+  <meta name="citation_author" content="Kim, Sehyeon">
+  <meta name="citation_author" content="Kang, Seokhyeong">
+  <meta name="citation_author" content="Mishchenko, Alan">
+  <meta name="citation_author" content="Fujita, Masahiro">
+  <meta name="citation_author" content="Sur-Kolay, Susmita">
+  <meta name="citation_author" content="Lin, Bill">
+  <meta name="citation_author" content="Cheng, Chung-Kuan">
+  <meta name="citation_publication_date" content="2026">
+  <meta name="citation_conference_title" content="IEEE/ACM International Conference on Computer-Aided Design">
+  <meta name="citation_pdf_url" content="https://b8kang.github.io/Free-Topology-TNS-ICCAD2026/FreeTopologyTNS_ICCAD2026.pdf">
+  <meta name="citation_doi" content="10.1145/3831252.3834143">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "name": "SAT-Based Free-Topology Transistor Network Synthesis under Stack-Height, Multi-Stage and Multi-Output Options",
+    "author": [
+      {"@type": "Person", "name": "Byeonggon Kang"},
+      {"@type": "Person", "name": "Sehyeon Kim"},
+      {"@type": "Person", "name": "Seokhyeong Kang"},
+      {"@type": "Person", "name": "Alan Mishchenko"},
+      {"@type": "Person", "name": "Masahiro Fujita"},
+      {"@type": "Person", "name": "Susmita Sur-Kolay"},
+      {"@type": "Person", "name": "Bill Lin"},
+      {"@type": "Person", "name": "Chung-Kuan Cheng"}
+    ],
+    "datePublished": "2026",
+    "isPartOf": {"@type": "PublicationEvent", "name": "ICCAD 2026"},
+    "url": "https://b8kang.github.io/Free-Topology-TNS-ICCAD2026/",
+    "sameAs": "https://doi.org/10.1145/3831252.3834143",
+    "encoding": {
+      "@type": "MediaObject",
+      "contentUrl": "https://b8kang.github.io/Free-Topology-TNS-ICCAD2026/FreeTopologyTNS_ICCAD2026.pdf",
+      "encodingFormat": "application/pdf"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172124;
+      --muted: #58676b;
+      --line: #d9e1e2;
+      --paper: #ffffff;
+      --soft: #f4f7f6;
+      --accent: #006d77;
+      --accent-dark: #00545c;
+      --warm: #d69e2e;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    a { color: var(--accent-dark); }
+    a:hover { color: var(--accent); }
+
+    .wrap {
+      width: min(920px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 72px 0 52px;
+      border-top: 6px solid var(--accent);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      color: var(--accent-dark);
+      font-size: 0.82rem;
+      font-weight: 750;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    h1, h2 { line-height: 1.2; letter-spacing: 0; }
+
+    h1 {
+      max-width: 880px;
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 3.25rem;
+      font-weight: 600;
+      overflow-wrap: anywhere;
+    }
+
+    h2 {
+      margin: 0 0 18px;
+      font-size: 1.45rem;
+    }
+
+    .authors {
+      max-width: 800px;
+      margin: 24px 0 8px;
+      font-weight: 650;
+      overflow-wrap: anywhere;
+    }
+
+    .venue { margin: 0; color: var(--muted); }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 42px;
+      padding: 8px 16px;
+      border: 1px solid var(--accent);
+      border-radius: 4px;
+      color: var(--accent-dark);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .button.primary { color: #ffffff; background: var(--accent); }
+    .button:hover { border-color: var(--accent-dark); color: #ffffff; background: var(--accent-dark); }
+
+    main section { padding: 48px 0; border-bottom: 1px solid var(--line); }
+
+    .lead { max-width: 780px; margin: 0; font-size: 1.08rem; }
+
+    .artifact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0 32px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .artifact-grid li { padding: 13px 0; border-top: 1px solid var(--line); }
+    .artifact-grid strong { display: block; }
+    .artifact-grid span { color: var(--muted); }
+
+    .paper-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 220px;
+      gap: 42px;
+      align-items: start;
+    }
+
+    .preview {
+      display: block;
+      width: 100%;
+      border: 1px solid var(--line);
+      box-shadow: 0 8px 24px rgba(23, 33, 36, 0.12);
+    }
+
+    pre {
+      margin: 0;
+      padding: 20px;
+      overflow-x: auto;
+      border-left: 4px solid var(--warm);
+      background: var(--soft);
+      font: 0.86rem/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    footer { padding: 28px 0 48px; color: var(--muted); font-size: 0.9rem; }
+
+    @media (max-width: 680px) {
+      .wrap { width: min(100% - 28px, 920px); }
+      header { padding: 48px 0 38px; }
+      h1 { font-size: 2rem; }
+      main section { padding: 38px 0; }
+      .artifact-grid, .paper-row { grid-template-columns: 1fr; }
+      .paper-row { gap: 28px; }
+      .preview { width: min(240px, 100%); }
+      .actions { display: grid; grid-template-columns: 1fr; }
+      .button { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="wrap">
+      <p class="eyebrow">ICCAD 2026</p>
+      <h1>SAT-Based Free-Topology Transistor Network Synthesis under Stack-Height, Multi-Stage and Multi-Output Options</h1>
+      <p class="authors">Byeonggon Kang, Sehyeon Kim, Seokhyeong Kang, Alan Mishchenko, Masahiro Fujita, Susmita Sur-Kolay, Bill Lin, and Chung-Kuan Cheng</p>
+      <p class="venue">IEEE/ACM International Conference on Computer-Aided Design (ICCAD 2026)<br>November 8&ndash;12, 2026 &middot; San Jose, California, USA</p>
+      <nav class="actions" aria-label="Project links">
+        <a class="button primary" href="FreeTopologyTNS_ICCAD2026.pdf">Paper</a>
+        <a class="button" href="https://github.com/b8kang/Free-Topology-TNS-ICCAD2026">GitHub Repository</a>
+        <a class="button" href="https://doi.org/10.1145/3831252.3834143">DOI</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div class="wrap">
+        <h2>Overview</h2>
+        <p class="lead">This work studies SAT-based synthesis of free-topology transistor networks under configurable stack-height, multi-stage, and multi-output options. This release preserves the generated circuits, simulation decks, and selected synthesis results associated with the paper; the complete synthesis implementation is not included.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <h2>Released Artifacts</h2>
+        <ul class="artifact-grid">
+          <li><strong>HSPICE input decks</strong><span>Generated simulation decks for the released cells.</span></li>
+          <li><strong>Transistor-level SPICE cells</strong><span>Generated 2-stack and 4-stack cell implementations.</span></li>
+          <li><strong>NSP 4-stack results</strong><span>Solver logs for the selected NSP benchmark cases.</span></li>
+          <li><strong>Multi-output results</strong><span>Synthesis logs for the released multi-output benchmarks.</span></li>
+          <li><strong>Comparison artifacts</strong><span>Generated MiniTNtk and L2L comparison decks and cells.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap paper-row">
+        <div>
+          <h2>Paper</h2>
+          <p>The camera-ready paper is available as a nine-page PDF. The archival publication is identified by DOI <a href="https://doi.org/10.1145/3831252.3834143">10.1145/3831252.3834143</a>.</p>
+          <a class="button primary" href="FreeTopologyTNS_ICCAD2026.pdf">Open PDF</a>
+        </div>
+        <a href="FreeTopologyTNS_ICCAD2026.pdf" aria-label="Open the camera-ready paper">
+          <img class="preview" src="paper-preview.png" alt="First page of the ICCAD 2026 paper" width="935" height="1210">
+        </a>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <h2>Citation</h2>
+        <pre>@inproceedings{kang2026sattns,
+  author    = {Byeonggon Kang and Sehyeon Kim and Seokhyeong Kang and Alan Mishchenko and Masahiro Fujita and Susmita Sur-Kolay and Bill Lin and Chung-Kuan Cheng},
+  title     = {{SAT}-Based Free-Topology Transistor Network Synthesis under Stack-Height, Multi-Stage and Multi-Output Options},
+  booktitle = {Proceedings of the IEEE/ACM International Conference on Computer-Aided Design (ICCAD)},
+  year      = {2026},
+  doi       = {10.1145/3831252.3834143}
+}</pre>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">Research artifact for ICCAD 2026.</div>
+  </footer>
+</body>
+</html>

@@ -1,74 +1,75 @@
 # SAT-Based Free-Topology Transistor Network Synthesis under Stack-Height, Multi-Stage and Multi-Output Options
 
-This repository contains the research artifact for our ICCAD 2026 paper. It includes generated HSPICE input decks, generated transistor-level cells, NSP benchmark results, multi-output synthesis results, and reference comparison data.
+This repository provides the released experimental artifacts and results associated with our ICCAD 2026 paper. It contains generated HSPICE input decks, transistor-level SPICE cells, and synthesis result logs. The complete synthesis implementation is not publicly released in this repository.
 
-## Paper
+- **Project Page:** https://b8kang.github.io/Free-Topology-TNS-ICCAD2026/
+- **Paper:** https://b8kang.github.io/Free-Topology-TNS-ICCAD2026/FreeTopologyTNS_ICCAD2026.pdf
+- **GitHub Repository:** https://github.com/b8kang/Free-Topology-TNS-ICCAD2026
+- **DOI:** https://doi.org/10.1145/3831252.3834143
 
 **SAT-Based Free-Topology Transistor Network Synthesis under Stack-Height, Multi-Stage and Multi-Output Options**
 
 Byeonggon Kang, Sehyeon Kim, Seokhyeong Kang, Alan Mishchenko, Masahiro Fujita, Susmita Sur-Kolay, Bill Lin, and Chung-Kuan Cheng
 
-IEEE/ACM International Conference on Computer-Aided Design (ICCAD 2026)
+**IEEE/ACM International Conference on Computer-Aided Design (ICCAD 2026)**
 
-November 8--12, 2026, San Jose, CA, USA
+November 8--12, 2026, San Jose, California, USA
 
-- [Camera-ready paper](TNS_ICCAD_FREE_2026_camera_ready_0904final.pdf)
-- [DOI: 10.1145/3831252.3834143](https://doi.org/10.1145/3831252.3834143)
+## What We Release
 
-Susmita Sur-Kolay conducted this work during her visit to UC San Diego.
-
-Keywords: standard cell circuits, transistor network synthesis, topology, SAT.
+- Generated HSPICE input decks for 3-input cells
+- Generated transistor-level SPICE cell implementations
+- NSP benchmark synthesis results under the 4-stack evaluation
+- Multi-output transistor-network synthesis results
+- MiniTNtk and L2L comparison artifacts
+- Camera-ready paper
 
 ## Repository Contents
 
-| Path | Contents |
-| --- | --- |
-| `generated_inputdecks/2stack/` | 68 generated HSPICE decks for 3-input, 2-stack cells |
-| `generated_inputdecks/4stack/` | 68 generated HSPICE decks for 3-input, 4-stack cells |
-| `generated_inputdecks/minitntk/` | 52 MiniTNtk comparison decks and one preserved crash artifact |
-| `generated_inputdecks/l2l/` | 22 L2L comparison decks |
-| `generated_spice_cells/2stack/` | 68 generated transistor-level 2-stack cells |
-| `generated_spice_cells/4stack/` | 68 generated transistor-level 4-stack cells |
-| `generated_spice_cells/minitntk_3input/` | 52 MiniTNtk comparison cells |
-| `generated_spice_cells/l2l_3input/` | 22 L2L comparison cells |
-| `NSP_4stack/` | 16 solver logs for the NSP 4-stack evaluation |
-| `MO/` | Multi-output synthesis result logs |
+### `generated_inputdecks/`
 
-The multi-output results are:
+Generated HSPICE simulation decks used in the experiments:
+
+- `2stack/`: 68 decks for generated 2-stack cells
+- `4stack/`: 68 decks for generated 4-stack cells
+- `minitntk/`: 52 MiniTNtk comparison decks and one preserved crash artifact
+- `l2l/`: 22 L2L comparison decks
+
+### `generated_spice_cells/`
+
+Generated transistor-level SPICE subcircuits:
+
+- `2stack/`: 68 generated 2-stack cells
+- `4stack/`: 68 generated 4-stack cells
+- `minitntk_3input/`: 52 MiniTNtk comparison cells
+- `l2l_3input/`: 22 L2L comparison cells
+
+### `NSP_4stack/`
+
+Sixteen solver logs for selected NSP benchmark cases under the 4-stack evaluation.
+
+### `MO/`
+
+Nine multi-output synthesis result logs:
 
 ```text
 AGR1.log  AGR2.log  BAR1.log  BAR2.log  FADD.log
 GUR2.log  SPEC.log  STE1.log  STE3.log
 ```
 
-## Using the Artifact
+`SPEC.log` records the final 43-transistor, 4-stage SPEC result under a maximum stack height of four. Its four outputs were checked against their target truth tables with the switch-level functionality checker.
 
-There is no build step. The repository contains generated data and archived results rather than the synthesis implementation.
+### `docs/`
 
-The `.sp` files are generated transistor-level subcircuits. The `.in` files are HSPICE simulation decks and identify the truth table and DUT in their headers. Running them requires:
+Source files for the GitHub Pages project page and a public copy of the camera-ready paper.
 
-- HSPICE or a compatible simulator;
-- the required transistor model deck;
-- referenced support cells, such as the input inverter; and
-- valid local simulator configuration and licensing.
+## Using the Artifacts
 
-The required model and support files are not distributed in this repository. Simulator include paths must therefore be adapted to the local environment.
+There is no build step. The repository contains generated artifacts and archived results rather than the synthesis source code.
 
-## Result Organization
+The `.sp` files are generated transistor-level subcircuits. The `.in` files are HSPICE simulation decks that identify the truth table and DUT in their headers. Running the decks requires HSPICE or a compatible simulator, the referenced transistor models and support cells, and valid local simulator configuration and licensing. These external dependencies are not distributed here, so include paths must be adapted to the local environment.
 
-- Generated experiment inputs: `generated_inputdecks/**/*.in`
-- Generated transistor networks: `generated_spice_cells/**/*.sp`
-- NSP synthesis results: `NSP_4stack/*.log`
-- Multi-output synthesis results: `MO/*.log`
-- Reference comparisons: the `minitntk` and `l2l` deck/cell directories
-
-The binary-like file `generated_inputdecks/minitntk/tb_3input_minitntk_tt00011000.crash` is an original preserved artifact. It is not required for ordinary inspection of the generated decks.
-
-## Reproducibility Notes
-
-This release preserves the paper's generated circuits, simulation decks, and selected solver results. It does not include the complete synthesis source, solver binaries, commercial simulator, transistor models, or license configuration needed to regenerate every artifact from scratch.
-
-Some solver logs retain command lines or local build names as execution provenance. Stored numerical results and generated circuits have not been regenerated or normalized for this release.
+Some solver logs retain command lines or build-directory names as execution provenance. Stored numerical results and generated circuits have not been regenerated or normalized for this release.
 
 ## Related Work
 
