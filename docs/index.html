@@ -172,14 +172,15 @@
 
     .paper-row {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 220px;
-      gap: 42px;
+      grid-template-columns: minmax(0, 1fr) 170px;
+      gap: 32px;
       align-items: start;
     }
 
     .preview {
       display: block;
       width: 100%;
+      height: auto;
       border: 1px solid var(--line);
       box-shadow: 0 8px 24px rgba(23, 33, 36, 0.12);
     }
@@ -202,7 +203,7 @@
       main section { padding: 38px 0; }
       .artifact-grid, .paper-row { grid-template-columns: 1fr; }
       .paper-row { gap: 28px; }
-      .preview { width: min(240px, 100%); }
+      .preview { width: min(200px, 100%); }
       .actions { display: grid; grid-template-columns: 1fr; }
       .button { width: 100%; justify-content: center; }
     }
